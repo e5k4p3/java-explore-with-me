@@ -47,7 +47,7 @@ public class StatsHitsServiceImpl implements StatsHitsService {
     }
 
     private void checkTime(LocalDateTime start, LocalDateTime end) {
-        if(start.isAfter(end)) {
+        if (start.isAfter(end)) {
             throw new TimeParamsException("Время окончание не может быть раньше старта.");
         }
     }

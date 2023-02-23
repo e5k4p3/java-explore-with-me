@@ -8,5 +8,6 @@ import java.util.Set;
 
 public interface StatsHitsService {
     void addHit(HitRequestDto requestDto);
+
     List<StatsResponseDto> getHitsStats(String start, String end, Set<String> uris, Boolean unique);
 }
