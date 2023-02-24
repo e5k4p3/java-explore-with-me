@@ -13,18 +13,18 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "hits_model")
+@Table(name = "hits")
 public class Hit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "hit_id")
+    @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name = "hit_app")
+    @Column(name = "app", nullable = false, length = 200)
     private String app;
-    @Column(name = "hit_uri")
+    @Column(name = "uri", nullable = false, length = 200)
     private String uri;
-    @Column(name = "hit_ip")
+    @Column(name = "ip", nullable = false, length = 15)
     private String ip;
-    @Column(name = "hit_time")
+    @Column(name = "timestamp", nullable = false)
     private LocalDateTime timestamp;
 }

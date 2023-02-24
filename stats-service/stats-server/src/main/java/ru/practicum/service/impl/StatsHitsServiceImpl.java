@@ -20,13 +20,13 @@ import java.util.Set;
 @Service
 @RequiredArgsConstructor
 public class StatsHitsServiceImpl implements StatsHitsService {
-    private final StatsHitsRepository repository;
+    private final StatsHitsRepository statsHitsRepository;
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public void addHit(HitRequestDto requestDto) {
         Hit hit = StatsHitsMapper.toHit(requestDto);
         log.info("Hit с uri " + hit.getUri() + " и ip " + hit.getIp() + " был добавлен.");
-        repository.save(hit);
+        statsHitsRepository.save(hit);
     }
 
     public List<StatsResponseDto> getHitsStats(String start, String end, Set<String> uris, Boolean unique) {
@@ -40,9 +40,9 @@ public class StatsHitsServiceImpl implements StatsHitsService {
         }
         checkTime(startTime, endTime);
         if (unique) {
-            return repository.findAllByIpUnique(startTime, endTime, uris);
+            return statsHitsRepository.findAllByIpUnique(startTime, endTime, uris);
         } else {
-            return repository.findAllByIp(startTime, endTime, uris);
+            return statsHitsRepository.findAllByIp(startTime, endTime, uris);
         }
     }
 

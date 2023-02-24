@@ -18,7 +18,7 @@ import java.util.Set;
 @RestController
 @RequiredArgsConstructor
 public class StatsHitsController {
-    private final StatsHitsService service;
+    private final StatsHitsService statsHitsService;
 
     @PostMapping("/hit")
     @ResponseStatus(HttpStatus.CREATED)
@@ -26,7 +26,7 @@ public class StatsHitsController {
                        BindingResult bindingResult) {
         ValidationErrorsHandler.logValidationErrors(bindingResult);
         log.debug("Получен POST запрос на добавление Hit-а.");
-        service.addHit(requestDto);
+        statsHitsService.addHit(requestDto);
     }
 
     @GetMapping("/stats")
@@ -36,6 +36,6 @@ public class StatsHitsController {
                                            @RequestParam Set<String> uris,
                                            @RequestParam(defaultValue = "false") Boolean unique) {
         log.debug("Получен GET запрос на получение Stats");
-        return service.getHitsStats(start, end, uris, unique);
+        return statsHitsService.getHitsStats(start, end, uris, unique);
     }
 }
