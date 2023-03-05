@@ -6,7 +6,7 @@ import org.springframework.validation.ObjectError;
 import ru.practicum.exceptions.ValidationException;
 
 @UtilityClass
-public class ValidationErrorsHandler {
+public final class ValidationErrorsHandler {
     public static void logValidationErrors(BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             for (ObjectError error : bindingResult.getAllErrors()) {
