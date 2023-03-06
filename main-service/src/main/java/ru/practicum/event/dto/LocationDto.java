@@ -2,8 +2,6 @@ package ru.practicum.event.dto;
 
 import lombok.*;
 
-import javax.persistence.Embeddable;
-
 @Getter
 @Setter
 @AllArgsConstructor

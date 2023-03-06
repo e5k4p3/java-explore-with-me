@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.practicum.category.model.Category;
-import ru.practicum.event.dto.LocationDto;
 import ru.practicum.event.model.enums.EventState;
 import ru.practicum.user.model.User;
 
