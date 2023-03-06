@@ -18,6 +18,7 @@ import ru.practicum.event.model.enums.EventState;
 import ru.practicum.event.model.enums.EventStateAction;
 import ru.practicum.event.service.EventService;
 import ru.practicum.event.util.EventMapper;
+import ru.practicum.event.util.LocationMapper;
 import ru.practicum.exceptions.ConflictOperationException;
 import ru.practicum.exceptions.EntityNotFoundException;
 import ru.practicum.requests.dao.RequestRepository;
@@ -112,7 +113,7 @@ public class EventServiceImpl implements EventService {
         }
         patchCommonEventParts(eventRequestDto, event);
         if (eventRequestDto.getLocation() != null) {
-            event.setLocation(eventRequestDto.getLocation());
+            event.setLocation(LocationMapper.toLocation(eventRequestDto.getLocation()));
         }
         if (eventRequestDto.getRequestModeration() != null) {
             event.setRequestModeration(eventRequestDto.getRequestModeration());

@@ -25,7 +25,7 @@ public final class EventMapper {
                 LocalDateTimeFormatter.toString(event.getEventDate()),
                 event.getId(),
                 UserMapper.toUserShortDto(event.getInitiator()),
-                event.getLocation(),
+                LocationMapper.toLocationDto(event.getLocation()),
                 event.getPaid(),
                 event.getParticipantLimit(),
                 LocalDateTimeFormatter.toString(event.getPublishedOn()),
@@ -63,7 +63,7 @@ public final class EventMapper {
                 0,
                 null,
                 null,
-                eventRequestDto.getLocation(),
+                LocationMapper.toLocation(eventRequestDto.getLocation()),
                 eventRequestDto.getPaid(),
                 eventRequestDto.getRequestModeration(),
                 PENDING

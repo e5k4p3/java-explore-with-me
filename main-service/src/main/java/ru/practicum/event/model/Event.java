@@ -47,7 +47,7 @@ public class Event {
     private User initiator;
     @Embedded
     @Column(name = "location", nullable = false)
-    private LocationDto location;
+    private Location location;
     @Column(name = "paid", nullable = false)
     private Boolean paid;
     @Column(name = "request_moderation", nullable = false)
