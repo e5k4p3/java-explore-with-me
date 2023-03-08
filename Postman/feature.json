@@ -1,0 +1,1367 @@
+{
+	"info": {
+		"_postman_id": "b44f1bf2-f13c-48c3-93f8-c87fa0e467ef",
+		"name": "feature-comments",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16863439"
+	},
+	"item": [
+		{
+			"name": "User create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"e5k4p3\",\r\n    \"email\": \"e5k4p3@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/admin/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"admin",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Category create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(201);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Категория\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/admin/categories",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"admin",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Event create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(201);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"annotation\": \"Примечание события для тестов.\",\r\n    \"category\": 1,\r\n    \"description\": \"Описание события для тестов.\",\r\n    \"eventDate\": \"2023-03-08 20:00:00\",\r\n    \"location\": {\r\n        \"lat\": 55.75,\r\n        \"lon\": 37.62\r\n    },\r\n    \"paid\": true,\r\n    \"participantLimit\": 10,\r\n    \"requestModeration\": false,\r\n    \"title\": \"Название события.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users/:userId/events",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						":userId",
+						"events"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comment create fail validation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"text\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users/:userId/events/:eventId/comments",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						":userId",
+						"events",
+						":eventId",
+						"comments"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "1"
+						},
+						{
+							"key": "eventId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comment create fail no user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"text\": \"Комментарий\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users/:userId/events/:eventId/comments",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						":userId",
+						"events",
+						":eventId",
+						"comments"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "2"
+						},
+						{
+							"key": "eventId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comment create fail no event",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"text\": \"Комментарий\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users/:userId/events/:eventId/comments",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						":userId",
+						"events",
+						":eventId",
+						"comments"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "1"
+						},
+						{
+							"key": "eventId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comment create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(201);\r",
+							"});\r",
+							"pm.test(\"Test create comment\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.eventId, '\"eventId\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.commentator.id, '\"id\" field').to.eql(1);\r",
+							"    pm.expect(jsonData.text, '\"text\" field').to.eql(\"Комментарий.\");\r",
+							"    pm.expect(jsonData.created, '\"created\" field').is.not.null;\r",
+							"    pm.expect(jsonData.edited, '\"edited\" field').is.false;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"text\": \"Комментарий.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users/:userId/events/:eventId/comments",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						":userId",
+						"events",
+						":eventId",
+						"comments"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "1"
+						},
+						{
+							"key": "eventId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comment change fail validation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"text\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						":userId",
+						"comments",
+						":commentId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "1"
+						},
+						{
+							"key": "commentId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comment change fail no comment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"text\": \"Новый комментарий.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						":userId",
+						"comments",
+						":commentId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "1"
+						},
+						{
+							"key": "commentId",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comment change fail no user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"text\": \"Новый комментарий.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						":userId",
+						"comments",
+						":commentId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "2"
+						},
+						{
+							"key": "commentId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User create other",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Mulenas\",\r\n    \"email\": \"mulenas@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/admin/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"admin",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comment change fail other user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 403\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(403);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"text\": \"Новый комментарий\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						":userId",
+						"comments",
+						":commentId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "2"
+						},
+						{
+							"key": "commentId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comment change",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(200);\r",
+							"});\r",
+							"pm.test(\"Test comment change\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.text, '\"text\" field').to.eql(\"Новый комментарий.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"text\": \"Новый комментарий.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						":userId",
+						"comments",
+						":commentId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "1"
+						},
+						{
+							"key": "commentId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comment get by id fail not found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/comments/:commentId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"comments",
+						":commentId"
+					],
+					"variable": [
+						{
+							"key": "commentId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comment get by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(200);\r",
+							"});\r",
+							"pm.test(\"Test comment get\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id, '\"id\" field').to.eql(1);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/comments/:commentId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"comments",
+						":commentId"
+					],
+					"variable": [
+						{
+							"key": "commentId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comment create by other user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"text\": \"Комментарий второго пользователя.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users/:userId/events/:eventId/comments",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						":userId",
+						"events",
+						":eventId",
+						"comments"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "2"
+						},
+						{
+							"key": "eventId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comments get by event id fail no event",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/events/:eventId/comments",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"events",
+						":eventId",
+						"comments"
+					],
+					"variable": [
+						{
+							"key": "eventId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comments get by event id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(200);\r",
+							"});\r",
+							"pm.test(\"Test get comments by event id\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).is.an('array');\r",
+							"    pm.expect(jsonData.length).to.eql(2);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/events/:eventId/comments",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"events",
+						":eventId",
+						"comments"
+					],
+					"variable": [
+						{
+							"key": "eventId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comments get by user id fail no user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users/:userId/comments",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						":userId",
+						"comments"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comments get by user id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(200);\r",
+							"});\r",
+							"pm.test(\"Test get comments by event id\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).is.an('array');\r",
+							"    pm.expect(jsonData.length).to.eql(1);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users/:userId/comments",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						":userId",
+						"comments"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comments get by user id and event id fail no user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users/:userId/events/:eventId/comments",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						":userId",
+						"events",
+						":eventId",
+						"comments"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "3"
+						},
+						{
+							"key": "eventId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comments get by user id and event id fail no event",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users/:userId/events/:eventId/comments",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						":userId",
+						"events",
+						":eventId",
+						"comments"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "2"
+						},
+						{
+							"key": "eventId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comments get by user id and event id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(200);\r",
+							"});\r",
+							"pm.test(\"Test get comments by user id and event id\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).is.an('array');\r",
+							"    pm.expect(jsonData.length).to.eql(1);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users/:userId/events/:eventId/comments",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						":userId",
+						"events",
+						":eventId",
+						"comments"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "2"
+						},
+						{
+							"key": "eventId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comment delete by user id and comment id fail no user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						":userId",
+						"comments",
+						":commentId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "3"
+						},
+						{
+							"key": "commentId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comment delete by user id and comment id fail no comment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						":userId",
+						"comments",
+						":commentId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "2"
+						},
+						{
+							"key": "commentId",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comment delete by user id and comment id fail other user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 403\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(403);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						":userId",
+						"comments",
+						":commentId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "2"
+						},
+						{
+							"key": "commentId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comment delete by user id event id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/users/:userId/comments/:commentId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						":userId",
+						"comments",
+						":commentId"
+					],
+					"variable": [
+						{
+							"key": "userId",
+							"value": "1"
+						},
+						{
+							"key": "commentId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comment delete by id by admin fail no comment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/admin/comments/:commentId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"admin",
+						"comments",
+						":commentId"
+					],
+					"variable": [
+						{
+							"key": "commentId",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comment delete by id by admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.expect(pm.response.code).to.eql(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/admin/comments/:commentId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"admin",
+						"comments",
+						":commentId"
+					],
+					"variable": [
+						{
+							"key": "commentId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
