@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import ru.practicum.category.controller.AdminCategoryController;
 import ru.practicum.category.controller.PublicCategoryController;
+import ru.practicum.comment.controller.AdminCommentController;
+import ru.practicum.comment.controller.PrivateCommentController;
+import ru.practicum.comment.controller.PublicCommentController;
 import ru.practicum.compilations.controller.AdminCompilationController;
 import ru.practicum.compilations.controller.PublicCompilationController;
 import ru.practicum.event.controller.AdminEventController;
@@ -29,7 +32,10 @@ import java.time.LocalDateTime;
         PrivateEventController.class,
         PublicEventController.class,
         PrivateRequestController.class,
-        AdminUserController.class
+        AdminUserController.class,
+        AdminCommentController.class,
+        PrivateCommentController.class,
+        PublicCommentController.class
 })
 public class ErrorHandler {
     @ExceptionHandler
